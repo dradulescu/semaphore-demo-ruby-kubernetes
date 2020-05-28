@@ -12,7 +12,7 @@ blocks:
           commands:
             - checkout
             - cache restore
-            - gem install bundler
+            - gem install bundle
             - bundle install --deployment --path vendor/bundle
             - cache store
   - name: Tests

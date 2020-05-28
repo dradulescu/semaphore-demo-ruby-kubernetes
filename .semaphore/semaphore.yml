@@ -22,6 +22,7 @@ blocks:
           commands:
             - checkout
             - cache restore
+            - 'gem install bundler:1.17.2'
             - bundle install --deployment --path vendor/bundle
             - bundle exec rspec
 promotions:

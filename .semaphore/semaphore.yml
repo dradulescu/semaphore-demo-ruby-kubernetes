@@ -2,8 +2,8 @@ version: v1.0
 name: CI
 agent:
   machine:
-    type: e1-standard-2
-    os_image: ubuntu1804
+    type: a1-standard-4
+    os_image: macos-mojave-xcode11
 blocks:
   - name: Install dependencies
     task:
@@ -11,23 +11,5 @@ blocks:
         - name: bundle install
           commands:
             - checkout
-            - cache restore
-            - 'gem install bundler:1.17.2'
-            - bundle install --deployment --path vendor/bundle
-            - cache store
-            - envsubst < deployment.yml | tee deployment.yml
-  - name: Tests
-    task:
-      jobs:
-        - name: rspec
-          commands:
-            - checkout
-            - cache restore
-            - 'gem install bundler:1.17.2'
-            - bundle install --deployment --path vendor/bundle
-            - bundle exec rspec
-promotions:
-  - name: Dockerize
-    pipeline_file: docker-build.yml
-    auto_promote_on:
-      - result: passed
+            - yarn cache dir
+            - cd && cache restore cmd && cd -
